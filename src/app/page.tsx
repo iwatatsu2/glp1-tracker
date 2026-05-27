@@ -13,9 +13,9 @@ import { useAuth } from "@/hooks/useAuth"
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabId>('home')
-  const { user, profileId, loading, signOut } = useAuth()
+  const { user, profileId, loading, purchased, signOut } = useAuth()
 
-  if (loading) {
+  if (loading || purchased === null && user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-app">
         <div className="text-center">
@@ -30,6 +30,34 @@ export default function Home() {
 
   if (!user || !profileId) {
     return <AuthPage />
+  }
+
+  if (!purchased) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-app px-4">
+        <div className="text-center max-w-sm space-y-4">
+          <div className="size-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center mx-auto">
+            <span className="text-3xl text-white">💉</span>
+          </div>
+          <h1 className="text-xl font-bold">GLP-1 Tracker</h1>
+          <p className="text-sm text-muted-foreground">
+            このアプリをご利用いただくには、MedApp Marketでの購入が必要です。
+          </p>
+          <a
+            href="https://medapp-market.vercel.app/apps/glp1-tracker"
+            className="inline-flex items-center justify-center rounded-lg bg-primary text-primary-foreground px-6 py-3 text-sm font-medium hover:bg-primary/90 transition-colors"
+          >
+            購入ページへ
+          </a>
+          <button
+            onClick={signOut}
+            className="block mx-auto text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            ログアウト
+          </button>
+        </div>
+      </div>
+    )
   }
 
   const renderContent = () => {
