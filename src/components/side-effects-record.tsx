@@ -75,7 +75,7 @@ export function SideEffectsRecord({ profileId }: SideEffectsRecordProps) {
         )}
       </div>
 
-      <Card className="bg-gradient-to-b from-orange-50/30 to-white">
+      <Card className="bg-gradient-to-b from-orange-50/30 to-white dark:from-orange-950/20 dark:to-card">
         <CardHeader className="pb-3">
           <CardTitle className="text-base">症状を選択</CardTitle>
         </CardHeader>

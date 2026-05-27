@@ -84,7 +84,7 @@ export function WeightDosageGraph({ profileId }: WeightDosageGraphProps) {
         {MEDICATIONS.map(med => (
           <button key={med.id} onClick={() => setMedication(med.id)}
             className={cn("flex-1 py-2.5 px-3 rounded-xl text-sm font-medium transition-all border-2",
-              medication === med.id ? "text-white shadow-md" : "bg-white text-muted-foreground border-border hover:border-primary/30"
+              medication === med.id ? "text-white shadow-md" : "bg-card text-muted-foreground border-border hover:border-primary/30"
             )}
             style={medication === med.id ? { backgroundColor: med.color, borderColor: med.color } : {}}
           >{med.label.split('（')[0]}</button>
@@ -93,21 +93,21 @@ export function WeightDosageGraph({ profileId }: WeightDosageGraphProps) {
 
       {currentWeight > 0 && (
         <div className="grid grid-cols-3 gap-3">
-          <Card className="bg-gradient-to-b from-blue-50 to-white">
+          <Card className="bg-gradient-to-b from-blue-50 to-white dark:from-blue-950/30 dark:to-card">
             <CardContent className="pt-4 pb-3 text-center">
               <Scale className="size-5 text-primary mx-auto mb-1" />
               <p className="text-2xl font-bold">{currentWeight}</p>
               <p className="text-xs text-muted-foreground">kg</p>
             </CardContent>
           </Card>
-          <Card className={cn("bg-gradient-to-b", isWeightLoss ? "from-green-50 to-white" : "from-red-50 to-white")}>
+          <Card className={cn("bg-gradient-to-b", isWeightLoss ? "from-green-50 to-white dark:from-green-950/30 dark:to-card" : "from-red-50 to-white dark:from-red-950/30 dark:to-card")}>
             <CardContent className="pt-4 pb-3 text-center">
               {isWeightLoss ? <TrendingDown className="size-5 text-success mx-auto mb-1" /> : <TrendingUp className="size-5 text-destructive mx-auto mb-1" />}
               <p className={cn("text-2xl font-bold", isWeightLoss ? "text-success" : "text-destructive")}>{weightChange > 0 ? '+' : ''}{weightChange.toFixed(1)}</p>
               <p className="text-xs text-muted-foreground">kg変化</p>
             </CardContent>
           </Card>
-          <Card className="bg-gradient-to-b from-purple-50 to-white">
+          <Card className="bg-gradient-to-b from-purple-50 to-white dark:from-purple-950/30 dark:to-card">
             <CardContent className="pt-4 pb-3 text-center">
               <Activity className="size-5 text-secondary mx-auto mb-1" />
               <p className="text-2xl font-bold">{bmi}</p>
@@ -118,7 +118,7 @@ export function WeightDosageGraph({ profileId }: WeightDosageGraphProps) {
       )}
 
       {chartData.length > 1 && (
-        <Card className="bg-gradient-to-b from-slate-50/50 to-white">
+        <Card className="bg-gradient-to-b from-slate-50/50 to-white dark:from-slate-900/50 dark:to-card">
           <CardHeader className="pb-2"><CardTitle className="text-base">体重推移と用量</CardTitle></CardHeader>
           <CardContent>
             <div className="h-64">
@@ -160,7 +160,7 @@ export function WeightDosageGraph({ profileId }: WeightDosageGraphProps) {
         </Card>
       )}
 
-      <Card className="bg-gradient-to-b from-blue-50/30 to-white">
+      <Card className="bg-gradient-to-b from-blue-50/30 to-white dark:from-blue-950/20 dark:to-card">
         <CardHeader className="pb-2"><CardTitle className="text-base">体重を記録</CardTitle></CardHeader>
         <CardContent>
           <div className="flex gap-3">
@@ -177,7 +177,7 @@ export function WeightDosageGraph({ profileId }: WeightDosageGraphProps) {
       {weightRecords.length > 0 && (
         <>
           <Separator />
-          <Card className="bg-slate-50/50">
+          <Card className="bg-slate-50/50 dark:bg-card">
             <CardHeader className="pb-2"><CardTitle className="text-base">記録履歴</CardTitle></CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -185,7 +185,7 @@ export function WeightDosageGraph({ profileId }: WeightDosageGraphProps) {
                   const prevRecord = arr[index + 1]
                   const diff = prevRecord ? record.weight - prevRecord.weight : 0
                   return (
-                    <div key={record.id} className="flex items-center justify-between py-2 px-3 bg-white rounded-lg border-b border-border last:border-0">
+                    <div key={record.id} className="flex items-center justify-between py-2 px-3 bg-card rounded-lg border-b border-border last:border-0">
                       <div className="flex items-center gap-3">
                         <div className="size-2 rounded-full bg-primary" />
                         <div>

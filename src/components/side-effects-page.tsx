@@ -20,7 +20,7 @@ export function SideEffectsPage({ profileId }: SideEffectsPageProps) {
           className={cn(
             "py-2 text-sm font-medium rounded-md transition-all",
             activeSubTab === 'record'
-              ? "bg-white text-foreground shadow-sm"
+              ? "bg-card text-foreground shadow-sm"
               : "text-muted-foreground hover:text-foreground"
           )}
         >
@@ -31,7 +31,7 @@ export function SideEffectsPage({ profileId }: SideEffectsPageProps) {
           className={cn(
             "py-2 text-sm font-medium rounded-md transition-all",
             activeSubTab === 'analysis'
-              ? "bg-white text-foreground shadow-sm"
+              ? "bg-card text-foreground shadow-sm"
               : "text-muted-foreground hover:text-foreground"
           )}
         >

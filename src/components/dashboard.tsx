@@ -82,7 +82,7 @@ export function Dashboard({ onNavigate, profileId }: DashboardProps) {
 
       {/* Welcome message for new users */}
       {noData && (
-        <Card className="bg-gradient-to-br from-blue-50/80 to-purple-50/40">
+        <Card className="bg-gradient-to-br from-blue-50/80 to-purple-50/40 dark:from-blue-950/40 dark:to-purple-950/20">
           <CardContent className="py-6 text-center">
             <Syringe className="size-8 text-primary mx-auto mb-3" />
             <p className="font-medium">ようこそ！</p>
@@ -95,7 +95,7 @@ export function Dashboard({ onNavigate, profileId }: DashboardProps) {
 
       {/* Injection Status Card */}
       {lastInjection && (
-        <Card className="overflow-hidden bg-gradient-to-br from-blue-50/80 to-purple-50/40">
+        <Card className="overflow-hidden bg-gradient-to-br from-blue-50/80 to-purple-50/40 dark:from-blue-950/40 dark:to-purple-950/20">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
@@ -149,7 +149,7 @@ export function Dashboard({ onNavigate, profileId }: DashboardProps) {
 
       {/* Weight Chart Mini */}
       {chartData.length > 0 && (
-        <Card className="bg-gradient-to-b from-slate-50/50 to-white">
+        <Card className="bg-gradient-to-b from-slate-50/50 to-white dark:from-slate-900/50 dark:to-card">
           <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <CardTitle className="text-base">体重推移</CardTitle>
@@ -174,7 +174,7 @@ export function Dashboard({ onNavigate, profileId }: DashboardProps) {
       )}
 
       {/* Side Effects Summary */}
-      <Card className="bg-gradient-to-b from-amber-50/30 to-white">
+      <Card className="bg-gradient-to-b from-amber-50/30 to-white dark:from-amber-950/20 dark:to-card">
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
             <CardTitle className="text-base">今週の副作用</CardTitle>

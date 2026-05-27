@@ -17,12 +17,12 @@ export default function SettingsPage() {
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex justify-between text-sm">
-              <span className="text-gray-500">身長</span>
+              <span className="text-muted-foreground">身長</span>
               <span className="font-medium">170 cm</span>
             </div>
             <Separator />
             <div className="flex justify-between text-sm">
-              <span className="text-gray-500">目標体重</span>
+              <span className="text-muted-foreground">目標体重</span>
               <span className="font-medium">75.0 kg</span>
             </div>
           </CardContent>
@@ -34,17 +34,17 @@ export default function SettingsPage() {
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex justify-between text-sm">
-              <span className="text-gray-500">薬剤</span>
+              <span className="text-muted-foreground">薬剤</span>
               <Badge variant="secondary">ウゴービ</Badge>
             </div>
             <Separator />
             <div className="flex justify-between text-sm">
-              <span className="text-gray-500">現在の用量</span>
+              <span className="text-muted-foreground">現在の用量</span>
               <span className="font-medium">1.0mg</span>
             </div>
             <Separator />
             <div className="flex justify-between text-sm">
-              <span className="text-gray-500">注射曜日</span>
+              <span className="text-muted-foreground">注射曜日</span>
               <span className="font-medium">毎週火曜日</span>
             </div>
           </CardContent>
@@ -56,10 +56,10 @@ export default function SettingsPage() {
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-500">ステータス</span>
-              <Badge className="bg-green-500">連携済み</Badge>
+              <span className="text-muted-foreground">ステータス</span>
+              <Badge className="bg-success">連携済み</Badge>
             </div>
-            <p className="text-xs text-gray-400 mt-2">
+            <p className="text-xs text-muted-foreground mt-2">
               LINE Botからリマインダー通知を受け取れます
             </p>
           </CardContent>
@@ -68,15 +68,15 @@ export default function SettingsPage() {
         <Card>
           <CardContent className="pt-5">
             <div className="text-center space-y-2">
-              <p className="text-xs text-gray-400">GLP-1 Tracker v1.0</p>
-              <p className="text-xs text-gray-400">
+              <p className="text-xs text-muted-foreground">GLP-1 Tracker v1.0</p>
+              <p className="text-xs text-muted-foreground">
                 開発・監修: Dr.いわたつ（糖尿病・内分泌専門医）
               </p>
               <div className="flex justify-center gap-3 text-xs">
-                <a href="#" className="text-blue-500 hover:underline">
+                <a href="#" className="text-primary hover:underline">
                   利用規約
                 </a>
-                <a href="#" className="text-blue-500 hover:underline">
+                <a href="#" className="text-primary hover:underline">
                   プライバシーポリシー
                 </a>
               </div>
