@@ -51,15 +51,6 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
         <CardContent className="pt-5 space-y-3">
           <h3 className="text-sm font-bold text-foreground">開発アプリ</h3>
           <a
-            href="https://driwatatsu.readdy.co"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block px-3 py-2 rounded-lg bg-muted/50 border border-border hover:border-primary/30 transition-colors"
-          >
-            <p className="text-sm font-medium text-foreground">DM Compass</p>
-            <p className="text-xs text-muted-foreground">病棟で使える糖尿病ツール（公式サイト）</p>
-          </a>
-          <a
             href="https://medapp-market.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
