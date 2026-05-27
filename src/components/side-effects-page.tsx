@@ -5,12 +5,15 @@ import { cn } from "@/lib/utils"
 import { SideEffectsRecord } from "./side-effects-record"
 import { SideEffectsAnalysis } from "./side-effects-analysis"
 
-export function SideEffectsPage() {
+interface SideEffectsPageProps {
+  profileId: string
+}
+
+export function SideEffectsPage({ profileId }: SideEffectsPageProps) {
   const [activeSubTab, setActiveSubTab] = useState<'record' | 'analysis'>('record')
 
   return (
     <div className="space-y-4">
-      {/* Tab buttons */}
       <div className="grid grid-cols-2 gap-1 bg-muted p-1 rounded-lg">
         <button
           onClick={() => setActiveSubTab('record')}
@@ -35,9 +38,7 @@ export function SideEffectsPage() {
           分析
         </button>
       </div>
-
-      {/* Content */}
-      {activeSubTab === 'record' ? <SideEffectsRecord /> : <SideEffectsAnalysis />}
+      {activeSubTab === 'record' ? <SideEffectsRecord profileId={profileId} /> : <SideEffectsAnalysis profileId={profileId} />}
     </div>
   )
 }

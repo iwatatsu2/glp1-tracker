@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -20,15 +20,53 @@ import {
   FileText,
   HelpCircle,
   ChevronRight,
-  Shield
+  Shield,
+  LogOut,
 } from "lucide-react"
-import { mockInjectionRecords, DOSAGES, MEDICATIONS, MEDICATION_DOSES, formatDateFull, type Medication } from "@/lib/data"
+import { MEDICATIONS, MEDICATION_DOSES, type Medication } from "@/lib/data"
+import { useProfile, useInjectionLogs } from "@/hooks/useSupabaseData"
 
-export function SettingsScreen() {
-  const lastInjection = mockInjectionRecords[0]
-  const currentDosage = lastInjection?.dosage || DOSAGES[0]
+interface SettingsScreenProps {
+  profileId: string
+  onSignOut: () => void
+}
+
+export function SettingsScreen({ profileId, onSignOut }: SettingsScreenProps) {
+  const { profile, updateProfile } = useProfile(profileId)
+  const { records: injections } = useInjectionLogs(profileId)
+
+  const lastInjection = injections[0]
+  const currentDosage = lastInjection?.dosage || 0.25
+
   const [selectedMed, setSelectedMed] = useState<Medication>('wegovy')
+  const [selectedDose, setSelectedDose] = useState<string>(currentDosage.toString())
+
+  useEffect(() => {
+    if (profile?.medication) setSelectedMed(profile.medication)
+    if (profile?.current_dose) setSelectedDose(profile.current_dose)
+  }, [profile])
+
   const doses = MEDICATION_DOSES[selectedMed]
+
+  const handleMedChange = async (v: string | null) => {
+    if (!v) return
+    const med = v as Medication
+    setSelectedMed(med)
+    const newDoses = MEDICATION_DOSES[med]
+    setSelectedDose(newDoses[0].toString())
+    await updateProfile({ medication: med, current_dose: newDoses[0].toString() })
+  }
+
+  const handleDoseChange = async (v: string | null) => {
+    if (!v) return
+    setSelectedDose(v)
+    await updateProfile({ current_dose: v })
+  }
+
+  const handleWeekdayChange = async (v: string | null) => {
+    if (!v) return
+    await updateProfile({ injection_weekday: parseInt(v) })
+  }
 
   return (
     <div className="space-y-4">
@@ -44,9 +82,6 @@ export function SettingsScreen() {
             <div>
               <p className="text-sm text-muted-foreground">現在の用量</p>
               <p className="text-2xl font-bold">{currentDosage}mg</p>
-              <p className="text-xs text-muted-foreground">
-                最終更新: {formatDateFull(lastInjection?.date || new Date())}
-              </p>
             </div>
           </div>
         </CardContent>
@@ -63,7 +98,7 @@ export function SettingsScreen() {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label>使用中の薬剤</Label>
-            <Select value={selectedMed} onValueChange={(v) => setSelectedMed(v as Medication)}>
+            <Select value={selectedMed} onValueChange={handleMedChange}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
@@ -77,7 +112,7 @@ export function SettingsScreen() {
 
           <div className="space-y-2">
             <Label>現在の用量</Label>
-            <Select defaultValue={doses[0]?.toString()}>
+            <Select value={selectedDose} onValueChange={handleDoseChange}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
@@ -93,18 +128,18 @@ export function SettingsScreen() {
 
           <div className="space-y-2">
             <Label>注射曜日</Label>
-            <Select defaultValue="sunday">
+            <Select value={profile?.injection_weekday?.toString() || "0"} onValueChange={handleWeekdayChange}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="sunday">日曜日</SelectItem>
-                <SelectItem value="monday">月曜日</SelectItem>
-                <SelectItem value="tuesday">火曜日</SelectItem>
-                <SelectItem value="wednesday">水曜日</SelectItem>
-                <SelectItem value="thursday">木曜日</SelectItem>
-                <SelectItem value="friday">金曜日</SelectItem>
-                <SelectItem value="saturday">土曜日</SelectItem>
+                <SelectItem value="0">日曜日</SelectItem>
+                <SelectItem value="1">月曜日</SelectItem>
+                <SelectItem value="2">火曜日</SelectItem>
+                <SelectItem value="3">水曜日</SelectItem>
+                <SelectItem value="4">木曜日</SelectItem>
+                <SelectItem value="5">金曜日</SelectItem>
+                <SelectItem value="6">土曜日</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -245,6 +280,12 @@ export function SettingsScreen() {
           </Button>
         </CardContent>
       </Card>
+
+      {/* Sign Out */}
+      <Button variant="outline" className="w-full" onClick={onSignOut}>
+        <LogOut className="size-4 mr-2" />
+        ログアウト
+      </Button>
 
       <div className="text-center py-4">
         <p className="text-sm text-muted-foreground">GLP-1 Tracker</p>
