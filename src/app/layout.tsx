@@ -33,7 +33,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={`${geistSans.variable}`}>
+    <html lang="ja" className={`${geistSans.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `try{if(JSON.parse(localStorage.getItem("glp1-settings")||"{}").darkMode)document.documentElement.classList.add("dark")}catch(e){}` }} />
+      </head>
       <body className="font-sans antialiased bg-gradient-app min-h-screen">
         {children}
       </body>
