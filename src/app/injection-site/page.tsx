@@ -9,14 +9,14 @@ import { Badge } from "@/components/ui/badge";
 import { InjectionSite, INJECTION_SITE_LABELS } from "@/lib/types";
 import { demoInjectionSites } from "@/lib/demo-data";
 
-// Positions as percentages relative to the body-map image (matching the teal circles)
+// Positions as percentages relative to the body-map image (detected from teal circles)
 const SITES: { id: InjectionSite; x: number; y: number }[] = [
-  { id: "arm_left", x: 24, y: 28 },
-  { id: "arm_right", x: 76, y: 28 },
-  { id: "abdomen_left", x: 39, y: 42 },
-  { id: "abdomen_right", x: 61, y: 42 },
-  { id: "thigh_left", x: 38, y: 62 },
-  { id: "thigh_right", x: 62, y: 62 },
+  { id: "arm_left", x: 32.5, y: 32.7 },
+  { id: "arm_right", x: 67.5, y: 32.7 },
+  { id: "abdomen_left", x: 43.2, y: 42.7 },
+  { id: "abdomen_right", x: 56.8, y: 42.6 },
+  { id: "thigh_left", x: 42.0, y: 62.4 },
+  { id: "thigh_right", x: 57.9, y: 62.4 },
 ];
 
 function getLastUsed(site: InjectionSite): { weeksAgo: number | null; date: string | null } {
@@ -65,15 +65,15 @@ export default function InjectionSitePage() {
       <div className="p-4 space-y-4">
         <h1 className="text-xl font-bold pt-2">注射部位ローテーション</h1>
 
-        <Card>
-          <CardContent className="pt-5">
+        <Card className="overflow-visible">
+          <CardContent className="pt-5 overflow-visible">
             <p className="text-sm text-gray-500 mb-3">
               タップして今回の注射部位を選択してください
             </p>
 
             {/* Body Map with overlay markers */}
-            <div className="flex justify-center">
-              <div className="relative w-64">
+            <div className="flex justify-center overflow-visible">
+              <div className="relative w-64 overflow-visible">
                 <Image
                   src="/body-map.png"
                   alt="注射部位マップ"
@@ -91,12 +91,12 @@ export default function InjectionSitePage() {
                     <button
                       key={site.id}
                       onClick={() => setSelected(site.id)}
-                      className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full transition-all"
+                      className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full transition-all z-10"
                       style={{
                         left: `${site.x}%`,
                         top: `${site.y}%`,
-                        width: isSelected ? 44 : 36,
-                        height: isSelected ? 44 : 36,
+                        width: isSelected ? 40 : 32,
+                        height: isSelected ? 40 : 32,
                         backgroundColor: color,
                         opacity: 0.55,
                         border: isSelected ? "3px solid #1d4ed8" : "2px solid transparent",
@@ -111,8 +111,36 @@ export default function InjectionSitePage() {
               </div>
             </div>
 
+            {/* Site selection buttons (backup for hard-to-tap areas) */}
+            <div className="grid grid-cols-3 gap-2 mt-4">
+              {SITES.map((site) => {
+                const isSelected = selected === site.id;
+                const { weeksAgo } = getLastUsed(site.id);
+                const isRecommended = recommended.id === site.id;
+                return (
+                  <button
+                    key={`btn-${site.id}`}
+                    onClick={() => setSelected(site.id)}
+                    className={`p-2 rounded-lg text-xs font-medium border-2 transition-all ${
+                      isSelected
+                        ? "border-blue-500 bg-blue-50 text-blue-700"
+                        : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
+                    }`}
+                  >
+                    {INJECTION_SITE_LABELS[site.id]}
+                    {isRecommended && " ★"}
+                    {weeksAgo !== null && (
+                      <span className="block text-[10px] text-gray-400 mt-0.5">
+                        {weeksAgo === 0 ? "今週" : `${weeksAgo}週前`}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
             {/* Legend */}
-            <div className="flex justify-center gap-4 mt-2 text-xs">
+            <div className="flex justify-center gap-4 mt-3 text-xs">
               <div className="flex items-center gap-1">
                 <div className="w-3 h-3 rounded-full bg-red-500 opacity-60" />
                 今週使用
