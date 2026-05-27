@@ -66,7 +66,7 @@ export function InjectionSiteRotation({ profileId }: InjectionSiteRotationProps)
     <div className="space-y-4">
       <h1 className="text-xl font-bold text-foreground">注射部位ローテーション</h1>
 
-      <Card className="overflow-visible bg-gradient-to-b from-blue-50/50 to-white">
+      <Card className="overflow-visible bg-gradient-to-b from-blue-50/50 to-white dark:from-card dark:to-card">
         <CardContent className="pt-5 overflow-visible">
           <p className="text-sm text-muted-foreground mb-3">タップして今回の注射部位を選択してください</p>
 
@@ -110,7 +110,7 @@ export function InjectionSiteRotation({ profileId }: InjectionSiteRotationProps)
                   onClick={() => setSelected(site.id)}
                   className={cn(
                     "p-2 rounded-lg text-xs font-medium border-2 transition-all",
-                    isSelected ? "border-blue-500 bg-blue-50 text-blue-700" : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
+                    isSelected ? "border-blue-500 bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300" : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:border-gray-300"
                   )}
                 >
                   {site.label}{isRecommended && " ★"}
@@ -129,7 +129,7 @@ export function InjectionSiteRotation({ profileId }: InjectionSiteRotationProps)
       </Card>
 
       {selected && selectedInfo && (
-        <Card className="border-blue-200 bg-blue-50/30">
+        <Card className="border-blue-200 dark:border-blue-800 bg-blue-50/30 dark:bg-blue-950/30">
           <CardContent className="pt-5">
             <div className="flex items-center justify-between mb-3">
               <h3 className="font-semibold">{selectedInfo.label}</h3>
@@ -148,7 +148,7 @@ export function InjectionSiteRotation({ profileId }: InjectionSiteRotationProps)
         </Card>
       )}
 
-      <Card className="bg-slate-50/50">
+      <Card className="bg-slate-50/50 dark:bg-card">
         <CardHeader className="pb-2"><CardTitle className="text-base">使用履歴</CardTitle></CardHeader>
         <CardContent>
           {injections.length > 0 ? (
@@ -156,9 +156,9 @@ export function InjectionSiteRotation({ profileId }: InjectionSiteRotationProps)
               {injections.map((record) => {
                 const site = INJECTION_SITES.find(s => s.id === record.site)
                 return (
-                  <div key={record.id} className="flex items-center justify-between text-sm p-2 bg-white rounded-lg">
-                    <span className="font-medium">{site?.label}</span>
-                    <span className="text-gray-400">{formatDate(record.date)}</span>
+                  <div key={record.id} className="flex items-center justify-between text-sm p-2 bg-white dark:bg-gray-800 rounded-lg">
+                    <span className="font-medium text-foreground">{site?.label}</span>
+                    <span className="text-gray-400 dark:text-gray-500">{formatDate(record.date)}</span>
                   </div>
                 )
               })}
@@ -169,8 +169,8 @@ export function InjectionSiteRotation({ profileId }: InjectionSiteRotationProps)
         </CardContent>
       </Card>
 
-      <Card className="bg-blue-50 border-blue-200">
-        <CardContent className="pt-4 text-xs text-blue-700 space-y-1">
+      <Card className="bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800">
+        <CardContent className="pt-4 text-xs text-blue-700 dark:text-blue-300 space-y-1">
           <p className="font-semibold">💡 注射部位のポイント</p>
           <ul className="list-disc pl-4 space-y-0.5">
             <li>同じ部位への連続注射は避けましょう（最低2cm離す）</li>
