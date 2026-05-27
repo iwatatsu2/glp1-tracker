@@ -24,7 +24,7 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
       <h1 className="text-xl font-bold text-foreground">製作者について</h1>
 
       {/* Profile */}
-      <Card className="bg-gradient-to-b from-blue-50/50 to-white">
+      <Card className="bg-gradient-to-b from-blue-50/50 to-white dark:from-card dark:to-card">
         <CardContent className="pt-6 flex flex-col items-center text-center">
           <div className="w-[120px] h-[120px] rounded-full overflow-hidden mb-4">
             <Image
@@ -47,43 +47,48 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
       </Card>
 
       {/* Apps */}
-      <Card className="bg-gradient-to-b from-purple-50/30 to-white">
+      <Card className="bg-gradient-to-b from-purple-50/30 to-white dark:from-card dark:to-card">
         <CardContent className="pt-5 space-y-3">
           <h3 className="text-sm font-bold text-foreground">開発アプリ</h3>
           <a
             href="https://medapp-market.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="block px-3 py-2 rounded-lg bg-muted/50 border border-border hover:border-primary/30 transition-colors"
+            className="flex items-center gap-3 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-primary/30 transition-colors"
           >
-            <p className="text-sm font-medium text-foreground">医療アプリまとめ</p>
-            <p className="text-xs text-muted-foreground">開発した医療ツール一覧</p>
+            <div className="size-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shrink-0">
+              <span className="text-lg text-white">🏥</span>
+            </div>
+            <div>
+              <p className="text-sm font-medium text-foreground">医療アプリまとめ</p>
+              <p className="text-xs text-muted-foreground">開発した医療ツール一覧</p>
+            </div>
           </a>
         </CardContent>
       </Card>
 
       {/* SNS */}
-      <Card className="bg-gradient-to-b from-green-50/30 to-white">
+      <Card className="bg-gradient-to-b from-green-50/30 to-white dark:from-card dark:to-card">
         <CardContent className="pt-5 space-y-3">
           <h3 className="text-sm font-bold text-foreground">SNS</h3>
           <div className="space-y-2">
             <a href="https://www.instagram.com/dr.iwatatsu/" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-3 px-3 py-2 rounded-lg bg-muted/50 border border-border hover:border-primary/30 transition-colors">
+              className="flex items-center gap-3 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-primary/30 transition-colors">
               <span className="text-sm text-foreground">Instagram</span>
               <span className="text-xs text-muted-foreground">@dr.iwatatsu</span>
             </a>
             <a href="https://x.com/KenKyu1019799" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-3 px-3 py-2 rounded-lg bg-muted/50 border border-border hover:border-primary/30 transition-colors">
+              className="flex items-center gap-3 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-primary/30 transition-colors">
               <span className="text-sm text-foreground">X (Twitter)</span>
               <span className="text-xs text-muted-foreground">@KenKyu1019799</span>
             </a>
             <a href="https://slide.antaa.jp/profile/mtzDnleJ6DYJ" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-3 px-3 py-2 rounded-lg bg-muted/50 border border-border hover:border-primary/30 transition-colors">
+              className="flex items-center gap-3 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-primary/30 transition-colors">
               <span className="text-sm text-foreground">antaaスライド</span>
               <span className="text-xs text-muted-foreground">医療スライド共有</span>
             </a>
             <a href="https://note.com/dr_iwatatsu" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-3 px-3 py-2 rounded-lg bg-muted/50 border border-border hover:border-primary/30 transition-colors">
+              className="flex items-center gap-3 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-primary/30 transition-colors">
               <span className="text-sm text-foreground">note</span>
               <span className="text-xs text-muted-foreground">dr_iwatatsu</span>
             </a>
@@ -92,9 +97,17 @@ export function AboutPage({ onNavigate }: AboutPageProps) {
       </Card>
 
       {/* About this app */}
-      <Card className="bg-gradient-to-b from-orange-50/30 to-white">
+      <Card className="bg-gradient-to-b from-orange-50/30 to-white dark:from-card dark:to-card">
         <CardContent className="pt-5">
-          <h3 className="text-sm font-bold text-foreground mb-2">このアプリについて</h3>
+          <div className="flex items-center gap-3 mb-3">
+            <div className="size-12 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shrink-0">
+              <span className="text-2xl text-white">💉</span>
+            </div>
+            <div>
+              <h3 className="text-sm font-bold text-foreground">GLP-1 Tracker</h3>
+              <p className="text-xs text-muted-foreground">v1.0</p>
+            </div>
+          </div>
           <p className="text-sm text-muted-foreground leading-relaxed">
             GLP-1受容体作動薬による治療を、より安心して続けられるよう作りました。副作用の記録・注射部位の管理・体重推移の可視化をサポートします。
           </p>
