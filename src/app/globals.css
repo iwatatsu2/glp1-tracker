@@ -5,7 +5,7 @@
 
 :root {
   /* Healthcare App Theme - Blue/Purple palette */
-  --background: oklch(0.95 0.015 250);
+  --background: oklch(0.92 0.03 250);
   --foreground: oklch(0.2 0.02 260);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.2 0.02 260);
@@ -166,7 +166,11 @@
 
 /* Gradient background for app */
 .bg-gradient-app {
-  background: linear-gradient(180deg, oklch(0.95 0.015 250) 0%, oklch(0.93 0.02 260) 100%);
+  background: linear-gradient(180deg, oklch(0.92 0.03 250) 0%, oklch(0.90 0.035 260) 100%);
+}
+
+.dark .bg-gradient-app {
+  background: linear-gradient(180deg, oklch(0.15 0.02 260) 0%, oklch(0.13 0.025 270) 100%);
 }
 
 /* Progress ring styles */
